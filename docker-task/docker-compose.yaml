@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  mssql:
+    build: 
+      context: mssql/
+    image: mssql-server
+    environment:
+      MSSQL_DATABASE: db_vero_digital
+    ports:
+      - "1433:1433"
+
+  web:
+    build: 
+      context: php/
+    image: web
+    ports:
+      - "80:80"
+    depends_on:
+      - mssql
